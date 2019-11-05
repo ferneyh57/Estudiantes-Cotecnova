@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
+//llamamos la clase
   require_once 'MySQL.php';
+  //al pasamos los valores de la clase a una variable
   $mysql = new MySQL;
-   
+   //conectamos a la bd
   $mysql->conectar();
-
+//realizamos consultas para traer lo datos que necesitamos mas adelante
   $tipodocumento= $mysql->efectuarConsulta("SELECT tiendacotecnova.tipo_documento.tipo_documento_id, tiendacotecnova.tipo_documento.tipo_documento_nombre from tiendacotecnova.tipo_documento");
   $estadocivil= $mysql->efectuarConsulta("SELECT tiendacotecnova.estado_civil.estado_civil_id, tiendacotecnova.estado_civil.estado_civil_nombre  from tiendacotecnova.estado_civil");
   ?>

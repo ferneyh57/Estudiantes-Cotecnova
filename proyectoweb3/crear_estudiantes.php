@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
   <?php
+    //llamamos la clase
   require_once 'MySQL.php';
+    //pasamos los valores de la clase a la variable
   $mysql = new MySQL;
-   
+      //realizamos la conexion
   $mysql->conectar();
-
+//realizamos una consulta con los valores que vamos a utilizar
   $tipodocumento= $mysql->efectuarConsulta("SELECT tiendacotecnova.tipo_documento.tipo_documento_id, tiendacotecnova.tipo_documento.tipo_documento_nombre from tiendacotecnova.tipo_documento");
   $estadocivil= $mysql->efectuarConsulta("SELECT tiendacotecnova.estado_civil.estado_civil_id, tiendacotecnova.estado_civil.estado_civil_nombre	 from tiendacotecnova.estado_civil");
   $programa= $mysql->efectuarConsulta("SELECT tiendacotecnova.programa.programa_id, tiendacotecnova.programa.programa_nombre	 from tiendacotecnova.programa");
@@ -175,7 +177,9 @@
                 <div class="form-group">
                   <label class="col-form-label"> Tipodocumento</label>
                   <select name="tipodocumento" class="form-control" >
+                  <!-- creamos un arreglo con los datos de tipo documento-->
                     <?php while ($resultado=mysqli_fetch_assoc($tipodocumento)){?> 
+                      <!-- mostramos los datos que tenemos en el areglo-->
                     <option value="<?php echo $resultado['tipo_documento_id'] ?>"><?php echo $resultado['tipo_documento_nombre'] ?></option>
                     <?php
                     }
@@ -203,7 +207,9 @@
                 <div class="form-group">
                   <label class="col-form-label">Estado Civil</label>
                   <select name="estadocivil" class="form-control" >
+                    <!-- creamos un arreglo con los datos de estado civil-->
                     <?php while ($resultado=mysqli_fetch_assoc($estadocivil)){?> 
+                       <!-- mostramos los datos que tenemos en el areglo-->
                     <option value="<?php echo $resultado['estado_civil_id'] ?>"><?php echo $resultado['estado_civil_nombre'] ?></option>
                     <?php
                     }
@@ -214,7 +220,9 @@
                 <div class="form-group">
                   <label class="col-form-label">Programa</label>
                   <select name="programa" class="form-control" >
+                    <!-- creamos un arreglo con los datos de programa-->
                     <?php while ($resultado=mysqli_fetch_assoc($programa)){?> 
+                       <!-- mostramos los datos que tenemos en el areglo-->
                     <option value="<?php echo $resultado['programa_id'] ?>"><?php echo $resultado['programa_nombre'] ?></option>
                     <?php
                     }

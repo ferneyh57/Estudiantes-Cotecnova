@@ -3,26 +3,27 @@
 <?php
 //condicion para comprobar si los campos están declarados anteriormente y si no estan vacíos
 if(isset($_POST['enviar']) && !empty($_POST['tipodocumento']) && !empty($_POST['2']) &&  !empty($_POST['3']) && !empty($_POST['4']) && !empty($_POST['estadocivil']) && !empty($_POST['programa']) && !empty($_POST['8'])){
-    
+    //llamams la clase
     require_once 'MySQL.php';
     
  
-    
+    //pasamos los datos del formulario a las variabñes
     $tdoc= $_POST['tipodocumento'];
     $ndoc = $_POST['2'];
     $nombre = $_POST['3'];
     $apellido = $_POST['4'];
     $estadoc = $_POST['estadocivil'];
     $programa = $_POST['programa'];
+    //md5 se usa para encriptar
     $contrasena = md5($_POST['8']);
     $activo = 1;
    
-
+//pasamos los datos de la clase a una variable
     $mysql = new MySQL;
-   
+   //realizamos la conexion a la bd
     $mysql->conectar();
     
-   
+   //hacemos un insert mediante una consulta
     $insertar= $mysql->efectuarConsulta("insert into tiendacotecnova.estudiantes
     ( est_doc_iden, est_nombres, est_apellidos,  est_password, tipo_documento_id, programa_id, estado_civil_id, activo) 
     VALUES(   
@@ -32,8 +33,9 @@ if(isset($_POST['enviar']) && !empty($_POST['tipodocumento']) && !empty($_POST['
 
 
 
-    
+    //si el registro se crea mostramos un mensaje al usuario
     echo "<div class=\"alert alert-success alert-dismissible\"><a href=\"index.html\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a><strong>¡Bienvenido!</strong> Registrado Correctamente.";
+   //redirigimos al index
     header( "refresh:5;url=index.html" );
 
  
@@ -41,8 +43,10 @@ if(isset($_POST['enviar']) && !empty($_POST['tipodocumento']) && !empty($_POST['
 
 
  else{
+   //si el registro no se crea mostramos un mensaje al usuario
   echo "<div class=\"alert alert-danger alert-dismissible\"><a href=\"crear_estudiantes.php\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a><strong ¡Error!</strong> No se completo bien el formulario.";
-    header( "refresh:5;url=crear_estudiantes.php" );
+  //redirigimos al index 
+  header( "refresh:5;url=crear_estudiantes.php" );
  }
 ?>
  <script src="js/jquery-3.2.1.min.js"></script>

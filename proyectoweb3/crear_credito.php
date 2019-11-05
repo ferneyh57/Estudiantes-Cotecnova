@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
   <?php
+  //llamamos la clase
   require_once 'MySQL.php';
+  //pasamos los valores de la clase a la variable
   $mysql = new MySQL;
-   
+   //realizamos la conexion
   $mysql->conectar();
-
+//realizamos una consulta con los valores que vamos a utilizar
   $estudiantes= $mysql->efectuarConsulta("SELECT tiendacotecnova.estudiantes.est_doc_iden, tiendacotecnova.estudiantes.est_nombres from tiendacotecnova.estudiantes");
   ?>
 
@@ -174,7 +176,9 @@
                 <div class="form-group">
                   <label class="col-form-label">Estudiante</label>
                   <select name="estudiantes" class="form-control" >
+                     <!-- ciclo para comprobar las filas-->
                     <?php while ($resultado=mysqli_fetch_assoc($estudiantes)){?> 
+                       <!--mostrmos los valores en cada columna repitiendo hasta que rompa el ciclo-->
                     <option value="<?php echo $resultado['est_doc_iden'] ?>"><?php echo $resultado['est_nombres'] ?></option>
                     <?php
                     }

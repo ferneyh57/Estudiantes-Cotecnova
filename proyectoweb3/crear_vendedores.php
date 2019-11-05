@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
+//traemos la clase
   require_once 'MySQL.php';
+  //pasamos las funciones de la clase a una variable
   $mysql = new MySQL;
-   
+   //nos conectamos a la bd
   $mysql->conectar();
-
+//realizamos una consulta con los datos que vamos a utilizar
   $tipodocumento= $mysql->efectuarConsulta("SELECT tiendacotecnova.tipo_documento.tipo_documento_id, tiendacotecnova.tipo_documento.tipo_documento_nombre from tiendacotecnova.tipo_documento");
   $estadocivil= $mysql->efectuarConsulta("SELECT tiendacotecnova.estado_civil.estado_civil_id, tiendacotecnova.estado_civil.estado_civil_nombre  from tiendacotecnova.estado_civil");
   ?>
@@ -148,7 +150,9 @@
                   <div class="form-group">
                     <label for="exampleSelect1">Tipo Documento</label>
                     <select name="tipodocumento" class="form-control" >
+                    <!-- pasamos los datos a un arreglo-->
                     <?php while ($resultado=mysqli_fetch_assoc($tipodocumento)){?> 
+                    <!-- mostramos los datos en el arreglo-->
                     <option value="<?php echo $resultado['tipo_documento_id'] ?>"><?php echo $resultado['tipo_documento_nombre'] ?></option>
                     <?php
                     }
@@ -177,7 +181,9 @@
                   <div class="form-group">
                     <label for="exampleSelect1">Estado Civil</label>
                    <select name="estadocivil" class="form-control" >
+                   <!-- pasamos los datos a un arreglo-->
                     <?php while ($resultado=mysqli_fetch_assoc($estadocivil)){?> 
+                    <!-- mostramos los datos en el arreglo-->
                     <option value="<?php echo $resultado['estado_civil_id'] ?>"><?php echo $resultado['estado_civil_nombre'] ?></option>
                     <?php
                     }
