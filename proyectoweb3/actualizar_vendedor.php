@@ -139,12 +139,13 @@
             <div class="tile-body">
               <table class="table table-hover table-bordered" id="sampleTable">
                 <?php
+                //llamamos la clase
                       require_once 'MySQL.php';
-
+//entragamos los valores de la clase
                       $mysql = new MySQL;
-                   
+                   //nos conectamos a la bd
                       $mysql->conectar();
-
+//selecionamos los datos que usaremos de la bd
                       $consulta = $mysql ->efectuarConsulta("select tiendacotecnova.vendedores.ven_doc_iden,tiendacotecnova.vendedores.ven_nombres, tiendacotecnova.vendedores.ven_apellidos,tiendacotecnova.vendedores.estado_civil_id,tiendacotecnova.vendedores.tipo_documento_id from tiendacotecnova.vendedores");
 
                   ?>
@@ -162,11 +163,12 @@
                   
 
                   <?php
+                  //ciclo para ver si la consulta si retorna algo en la columnas
                     while ($resultado=mysqli_fetch_assoc($consulta)) {
                   ?>
                   <tbody>
                       <tr>
-                   
+                    <!-- mostramos los valores de la base de datos en la tabla -->
                           <td><?php echo $resultado['ven_doc_iden']?></td>
                           <td><?php echo $resultado['ven_nombres']?></td>
                           <td><?php echo $resultado['ven_apellidos']?></td>

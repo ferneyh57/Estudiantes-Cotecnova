@@ -1,30 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
   <?php
+    //llamamos la clase
   require_once 'MySQL.php';
+  // pasamos los valores de la clase
   $mysql = new MySQL;
-   
+    //nos conectamos
 $mysql->conectar();
     
- 
+ //traemos lo valores del formulario
     $numeroDocumento= $_POST['estudiantes'];
     $credito = $_POST['credito'];
   
+    //realizamos una consulta con los datos necesarios
     $consulta = $mysql ->efectuarConsulta("SELECT tiendacotecnova.estudiantes.est_total_credito from tiendacotecnova.estudiantes WHERE tiendacotecnova.estudiantes.est_doc_iden=".$numeroDocumento."");
 
-    
+    //ciclo que conprueba que la consulta este bien
     while ($resultado=mysqli_fetch_assoc($consulta)) {
 
+      //traemos un valor de la tabla estudiantes
   $creditoactual=  $resultado['est_total_credito'];
     
 }
-
+//sumamos el credito del formulario al credito que tenemos en la bd
     $sumacredito = $credito + $creditoactual;
 
    
     
     
-   
+   //actualizamos el credito con un update usando el documento del estudiante
     $insertar= $mysql->efectuarConsulta("update  tiendacotecnova.estudiantes set
       est_total_credito='" .$sumacredito. "' where est_doc_iden=".$numeroDocumento."
     ");

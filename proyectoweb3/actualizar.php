@@ -139,13 +139,13 @@
             <div class="tile-body">
               <table class="table table-hover table-bordered" id="sampleTable">
                 <?php
-                  
+                       //llamamos la clase
                       require_once 'MySQL.php';
-
+//entragamos los valores de la clase
                       $mysql = new MySQL;
-                   
+                    //nos conectamos a la bd
                       $mysql->conectar();
-
+//selecionamos los datos que usaremos de la bd
                       $consulta = $mysql ->efectuarConsulta("select  tiendacotecnova.estudiantes.est_id, tiendacotecnova.estudiantes.est_doc_iden,tiendacotecnova.estudiantes.est_nombres, tiendacotecnova.estudiantes.est_apellidos, tiendacotecnova.estudiantes.est_total_credito,tiendacotecnova.estudiantes.programa_id, tiendacotecnova.estudiantes.estado_civil_id from tiendacotecnova.estudiantes");
 
                   ?>
