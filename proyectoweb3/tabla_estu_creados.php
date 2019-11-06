@@ -140,12 +140,13 @@
             <div class="tile-body">
               <table class="table table-hover table-bordered" id="sampleTable">
                 <?php
+                //llamamos la clase
                       require_once 'MySQL.php';
-
+//pasamos las funciones a una nueva variable
                       $mysql = new MySQL;
-                   
+                   //nos conectamos a la bd
                       $mysql->conectar();
-
+//realizamos la consulta de los datos que vamos a utilizar
                       $consulta = $mysql ->efectuarConsulta("select tiendacotecnova.estudiantes.est_doc_iden,tiendacotecnova.estudiantes.est_nombres, tiendacotecnova.estudiantes.est_apellidos, tiendacotecnova.estudiantes.est_total_credito,tiendacotecnova.estudiantes.programa_id, tiendacotecnova.estudiantes.estado_civil_id, tiendacotecnova.estudiantes.activo  from tiendacotecnova.estudiantes");
 
                   ?>
@@ -165,7 +166,9 @@
                   
 
                   <?php
+                  //creamos un arreglo con los valores de la consulta
                     while ($resultado=mysqli_fetch_assoc($consulta)) {
+                      //comprobamos que el usuario
                       if($resultado['activo']==1){
 
                       
@@ -174,6 +177,7 @@
                   <tbody>
 
                       <tr>
+                      <!-- mostramos los valores dentro de arreglo-->
                           <td><?php echo $resultado['est_doc_iden']?></td>
                           <td><?php echo $resultado['est_nombres']?></td>
                           <td><?php echo $resultado['est_apellidos']?></td>

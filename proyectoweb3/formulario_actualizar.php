@@ -173,14 +173,16 @@
           <div class="row">
             <div class="col-lg-6">
             <?php
-            //trae
+            //traemos la clase
                 require_once 'MySQL.php';
-
+//pasamos las funciones a una nueva vriable
                 $mysql = new MySQL;
-              
+              //nos conectamos a la bd
                 $mysql->conectar();
+                //id que se envio mediante el boton
                 $id=$_GET['id'];
            
+                //creamos una consulta haciendo uso de un inner join para unir valores de dos tablas en una nueva
                 $consulta = $mysql ->efectuarConsulta("select tiendacotecnova.estudiantes.est_nombres,
                 tiendacotecnova.estudiantes.est_apellidos,
                 tiendacotecnova.estudiantes.est_total_credito,
@@ -194,6 +196,7 @@
                 on tiendacotecnova.estudiantes.programa_id = tiendacotecnova.programa.programa_id
                 where est_id =".$id."");
                 echo "$id";
+                //creaos un arreglo con la consulta
                 while ($resultado=mysqli_fetch_assoc($consulta)) {
                   $nombre = $resultado['est_nombres'];
                   $apellido = $resultado['est_apellidos'];
@@ -203,7 +206,7 @@
                   $programa = $resultado['programa_id'];
                   $programanombre = $resultado['programa_nombre'];
                 }
-              
+              //efectuamos consultas para usarlas en el formulario
                 $selectestado = $mysql -> efectuarConsulta("select tiendacotecnova.estado_civil.estado_civil_nombre, tiendacotecnova.estado_civil.estado_civil_id from tiendacotecnova.estado_civil");
 
                 
@@ -215,11 +218,13 @@
   
                 <div class="form-group">
                   <label class="col-form-label">Nombres</label>
+                  <!-- mostramos los valores de la bd-->
                   <input class="form-control" value="<?php echo $nombre;?>"  required name="nombre" type="text">
                 </div>
 
                 <div class="form-group">
                   <label class="col-form-label">Apellidos</label>
+                   <!-- mostramos los valores de la bd-->
                   <input class="form-control" value="<?php echo $apellido;?>" required name="apellido" type="text">
                 </div>
              
@@ -229,8 +234,10 @@
                   <select name="estadocivil" required class="form-control" >
                     <option value="<?php echo $estadocivil; ?>"><?php echo $estadoNombre; ?></option>
                     <option disable>Seleccione un nuevo estado civil</option>
+                     <!--creamos un arreglo con la tabla de estado civil-->
                     <?php while ($resultado=mysqli_fetch_assoc($selectestado)){
                     ?> 
+                     <!-- mostramos los valores del arreglo-->
                     <option value="<?php echo $resultado['estado_civil_id'] ?>"><?php echo $resultado['estado_civil_nombre'] ?></option>
                     
                     <?php
@@ -251,7 +258,9 @@
                   <select name="programa" required class="form-control" >
                     <option value="<?php echo $programa; ?>"><?php echo $programanombre; ?></option>
                     <option disable>Seleccione un Programa</option>
+                    <!--creamos un arreglo con la tabla de programa-->
                     <?php while ($resultado=mysqli_fetch_assoc($selectprograma)){?> 
+                    <!-- mostramos los valores del arreglo-->
                     <option value="<?php echo $resultado['programa_id'] ?>"><?php echo $resultado['programa_nombre'] ?></option>
                     <?php
                     }

@@ -1,5 +1,7 @@
 <?php
+//iniciamos sesion
 session_start();
+//comprobamos que la session no esta vacia
 if ($_SESSION['admin_usser']!= "")  {
 
 
@@ -94,6 +96,7 @@ if ($_SESSION['admin_usser']!= "")  {
     <aside class="app-sidebar">
       <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="https://s3.amazonaws.com/uifaces/faces/twitter/jsa/48.jpg" alt="User Image">
         <div>
+         <!-- mostramos el nombre del admin usando la sesion-->
           <p class="app-sidebar__user-name"><?php echo   $_SESSION['admin_nombres'] ?></p>
           <p class="app-sidebar__user-designation">Administrador</p>
         </div>

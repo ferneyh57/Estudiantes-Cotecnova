@@ -1,5 +1,5 @@
 <?php
-
+//creamos la clase
 class MySQL{
     //Declaracion de variables de conexion
     private $hostname  = "localhost";

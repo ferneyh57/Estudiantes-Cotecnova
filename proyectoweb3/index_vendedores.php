@@ -1,5 +1,7 @@
 <?php
+//iniciamos la sesion
 session_start();
+//comprobamos que la sesion no este vacia
 if ($_SESSION['ven_doc_iden']!= "")  {
 
 
@@ -95,6 +97,7 @@ if ($_SESSION['ven_doc_iden']!= "")  {
     <aside class="app-sidebar">
       <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="https://s3.amazonaws.com/uifaces/faces/twitter/jsa/48.jpg" alt="User Image">
         <div>
+        <!-- mostramos los nombres del usuario haciendo uso del sesion-->
           <p class="app-sidebar__user-name"><?php echo   $_SESSION['ven_nombres']." ".$_SESSION['ven_apellidos'] ?></p>
           <p class="app-sidebar__user-designation">Vendedor</p>
         </div>

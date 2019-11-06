@@ -1,16 +1,20 @@
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 <?php
-
+//comprobamos que los campos no este vacios
     if(isset($_POST['Identificacion']) && isset($_POST['pass'])  && isset($_POST['tipousuario']) && 
             !empty($_POST['Identificacion']) && !empty($_POST['pass'])  && !empty($_POST['tipousuario']) ){
-        
+        //traemos la clase
         require ("MySQL.php");
+        //pasamos las funciones de la clase a una nueva variable
         $mysql = new MySQL;
+        //pasamos los valores del formulario a nuevas variables
         $usuario = $_POST['Identificacion'];
         $contra = md5($_POST['pass']);
         $tipousuario =  $_POST['tipousuario'];
+        //mos conectamos a la bd
         $mysql->conectar();
         
+        //comprobamos el tipo de usuario ( cada usuario cuenta con una consulta distinta)
         if($tipousuario == 1){
 
             //Consulto si existe un usuario con ese estado

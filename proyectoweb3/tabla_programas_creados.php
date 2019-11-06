@@ -136,12 +136,13 @@
             <div class="tile-body">
               <table class="table table-hover table-bordered" id="sampleTable">
                 <?php
+                //llamamos la clase
                     require_once 'MySQL.php';
-
+//pasamos las funcones de la clase a una nueva variable
                     $mysql = new MySQL;
-                 
+                 //nos conectamos a la bd
                     $mysql->conectar();
-
+// realizamos una consulta para obtener los datos necesarios
                     $consulta = $mysql ->efectuarConsulta("select tiendacotecnova.programa.programa_id,  tiendacotecnova.programa.programa_nombre from tiendacotecnova.programa");
                 ?>
                   <thead>
@@ -151,11 +152,13 @@
                     </tr>
                   </thead>
                   <?php
+                  //creamos un arreglo con la consulta
                     while ($resultado=mysqli_fetch_assoc($consulta)) {
                       
                   ?>
                   <tbody>
                       <tr>
+                      <!-- mostramos los valores del arreglo-->
                           <td><?php echo $resultado['programa_id']?></td>
                           <td><?php echo $resultado['programa_nombre']?></td>
 

@@ -136,12 +136,13 @@
             <div class="tile-body">
               <table class="table table-hover table-bordered" id="sampleTable">
                 <?php
+                //llamamos la clase
                     require_once 'MySQL.php';
-
+//pasamos las funciones a una nueva variable
                     $mysql = new MySQL;
-                 
+                 //nos conectamos a la bd
                     $mysql->conectar();
-
+//realizamos una consulta de los datos que necesitaremos despues
                     $consulta = $mysql ->efectuarConsulta("select tiendacotecnova.creditos.cre_fecha_hora_act,  tiendacotecnova.creditos.cre_est_doc_iden,  tiendacotecnova.creditos.cre_est_total_credito,  tiendacotecnova.creditos.cre_ven_doc_iden from tiendacotecnova.creditos");
                 ?>
                   <thead>
@@ -153,11 +154,13 @@
                     </tr>
                   </thead>
                   <?php
+                  //convertimos la consulta en un arreglo
                     while ($resultado=mysqli_fetch_assoc($consulta)) {
                       
                   ?>
                   <tbody>
                       <tr>
+                      <!-- mostramos los valores en el arreglo-->
                           <td><?php echo $resultado['cre_fecha_hora_act']?></td>
                           <td><?php echo $resultado['cre_est_doc_iden']?></td>
                           <td><?php echo $resultado['cre_est_total_credito']?></td>
