@@ -12,8 +12,8 @@ BODY {
     height: auto;
 }
 </style>
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/Chart.min.js"></script>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/Chart.js"></script>
 
 
 </head>
@@ -47,8 +47,8 @@ BODY {
                         labels: programa_nombre,
                         datasets: [
                             {
-                                label: 'Student Marks',
-                                backgroundColor: '#49e2ff',
+                                label: 'Estudiantes por programa',
+                                backgroundColor: '#ccccc',
                                 borderColor: '#46d5f1',
                                 hoverBackgroundColor: '#CCCCCC',
                                 hoverBorderColor: '#666666',
