@@ -2,11 +2,11 @@
 <?php
 //condicion para comprobar si los campos están declarados anteriormente y si no estan vacíos
 if(isset($_POST['enviar']) && !empty($_POST['tipodocumento']) && !empty($_POST['identificacionvendedor']) && !empty($_POST['nombrevendedor']) && !empty($_POST['apellidovendedor']) && !empty($_POST['estadocivil']) && !empty($_POST['clavevendedor'])){
-    
+    //traemos la clase
     require_once 'MySQL.php';
     
  
-    
+    //pasamos los valores del formulario a las variables
     $tdoc= $_POST['tipodocumento'];
     $ndoc = $_POST['identificacionvendedor'];
     $nombre = $_POST['nombrevendedor'];
@@ -14,12 +14,12 @@ if(isset($_POST['enviar']) && !empty($_POST['tipodocumento']) && !empty($_POST['
     $estadoc = $_POST['estadocivil'];
     $contrasena = md5($_POST['clavevendedor']);
     $activo = 1;
-
+//pasamos las funciones de la clase a una nueva variable
     $mysql = new MySQL;
-   
+   //nos conectamos a la base de datos
     $mysql->conectar();
     
-   
+   //realizamos una consulta donde se insertan los datos del vendedor
     $insertar= $mysql->efectuarConsulta("insert into tiendacotecnova.vendedores ( ven_doc_iden, ven_nombres, ven_apellidos, ven_password, estado_civil_id, tipo_documento_id, activo) VALUES(  '".$ndoc. "', '" .$nombre. "','" .$apellido. "','" .$contrasena. "','" .$estadoc. "', '".$tdoc. "', '".$activo."')"); 
 
 
@@ -27,12 +27,16 @@ if(isset($_POST['enviar']) && !empty($_POST['tipodocumento']) && !empty($_POST['
 
 
 
+    //si se realiza correctamente el insert se lo comunicamos al usuario
     
     echo "<div class=\"alert alert-success alert-dismissible\"><a href=\"index.html\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a><strong>¡Bienvenido!</strong> Registrado Correctamente.";
+    //redirigimos al index
     header( "refresh:5;url=index.html" );
 
  }else{
+   //si no se realiza correctamente el insert se lo comunicamos al usuario
      echo "<div class=\"alert alert-danger alert-dismissible\"><a href=\"crear_vendedores.php\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a><strong ¡Error!</strong> No se completo bien el formulario.";
+     //redirigimos al formulario
     header( "refresh:5;url=crear_vendedores.php" );
  }
  

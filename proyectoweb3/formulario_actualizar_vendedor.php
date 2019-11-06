@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
   <?php
+  //llamamos la clase
   require_once 'MySQL.php';
+  //pasamos las funciones de la clase a una nueva variable
   $mysql = new MySQL;
-   
+   //realizamos la conexion a la bd
   $mysql->conectar();
-
+//consultamos los datos que vamos a usar mas adelante
   $tipodocumento= $mysql->efectuarConsulta("SELECT tiendacotecnova.tipo_documento.tipo_documento_id, tiendacotecnova.tipo_documento.tipo_documento_nombre from tiendacotecnova.tipo_documento");
   $estadocivil= $mysql->efectuarConsulta("SELECT tiendacotecnova.estado_civil.estado_civil_id, tiendacotecnova.estado_civil.estado_civil_nombre	 from tiendacotecnova.estado_civil");
   ?>
@@ -171,13 +173,15 @@
             <div class="col-lg-6">
 
               <?php
+                  //llamamos la clase
                 require_once 'MySQL.php';
-
+ //pasamos las funciones de la clase a una nueva variable
                 $mysql = new MySQL;
-              
+                 //realizamos la conexion a la bd
                 $mysql->conectar();
+                //obtenemos el id que enviamos con el boton
                 $id=$_GET['id'];
-
+                //usamos una consulta en este caso utilizamos un inner join para unir los valores de dos tablas en una nueva
                 $consulta = $mysql ->efectuarConsulta("select tiendacotecnova.vendedores.ven_nombres,
                 tiendacotecnova.vendedores.est_apellidos,
                 tiendacotecnova.estado_civil.estado_civil_nombre,
@@ -186,13 +190,14 @@
                 on tiendacotecnova.vendedores.estado_civil_id = tiendacotecnova.estado_civil.estado_civil_id
                 where ven_id =".$id."");
                 echo "$id";
+                //creamos un array con la consulta
                 while ($resultado=mysqli_fetch_assoc($consulta)) {
                   $nombre = $resultado['ven_nombres'];
                   $apellido = $resultado['ven_apellidos'];
                   $estadocivil = $resultado['estado_civil_id'];
                   $estadoNombre = $resultado['estado_civil_nombre'];
                 }
-              
+              //realizamos una consulta
                 $selectestado = $mysql -> efectuarConsulta("select tiendacotecnova.estado_civil.estado_civil_nombre, tiendacotecnova.estado_civil.estado_civil_id from tiendacotecnova.estado_civil");
 
               ?>
@@ -201,13 +206,15 @@
                 
 
 
-
+              
                 <div class="form-group">
                   <label class="col-form-label">Nombres</label>
+                   <!-- mostramos los valores de la bd-->
                   <input class="form-control" value="<?php echo $nombre;?>"  required name="nombre" type="text">
                 </div>
 
                 <div class="form-group">
+                 <!-- mostramos los valores de la bd-->
                   <label class="col-form-label">Apellidos</label>
                   <input class="form-control" value="<?php echo $apellido;?>" required name="apellido" type="text">
                 </div>
@@ -215,7 +222,9 @@
                 <div class="form-group">
                   <label class="col-form-label">Tipo docuento</label>
                   <select name="tipodoc" class="form-control" >
+                   <!-- creamos un array con la tabla tipodocumento-->
                     <?php while ($resultado=mysqli_fetch_assoc($tipodocumento)){?> 
+                     <!-- traemos los valores dentro del arreglo-->
                     <option value="<?php echo $resultado['tipo_documento_id'] ?>"><?php echo $resultado['tipo_documento_nombre'] ?></option>
                     <?php
                     }
@@ -225,7 +234,9 @@
                 <div class="form-group">
                   <label class="col-form-label">Estado Civil</label>
                   <select name="estadocivil" class="form-control" >
+                  <!-- creamos un array con la tabla tipodocumento-->
                     <?php while ($resultado=mysqli_fetch_assoc($estadocivil)){?> 
+                    <!-- traemos los valores dentro del arreglo-->
                     <option value="<?php echo $resultado['estado_civil_id'] ?>"><?php echo $resultado['estado_civil_nombre'] ?></option>
                     <?php
                     }

@@ -139,13 +139,13 @@
             <div class="tile-body">
               <table class="table table-hover table-bordered" id="sampleTable">
                 <?php
-                  
+                  //llamamos la clase
                       require_once 'MySQL.php';
-
+//pasamos las funciones a una nueva variable
                       $mysql = new MySQL;
-                   
+                 //nos conectamos a la bd  
                       $mysql->conectar();
-
+//realizamos una consulta con los datos que utilizaremos
                       $consulta = $mysql ->efectuarConsulta("select  tiendacotecnova.estudiantes.est_id, tiendacotecnova.estudiantes.est_doc_iden,tiendacotecnova.estudiantes.est_nombres, tiendacotecnova.estudiantes.est_apellidos, tiendacotecnova.estudiantes.est_total_credito,tiendacotecnova.estudiantes.programa_id, tiendacotecnova.estudiantes.estado_civil_id from tiendacotecnova.estudiantes where activo=1");
 
                   ?>
@@ -166,20 +166,21 @@
                   
 
                   <?php
+                  //convertimos la consulta en un arreglo
                     while ($resultado=mysqli_fetch_assoc($consulta)) {
 
                   ?>
                   <tbody>
                       <tr>
                    
-                          
+                          <!-- mostramos los valores en el arreglo-->
                           <td><?php echo $resultado['est_nombres']?></td>
                           <td><?php echo $resultado['est_apellidos']?></td>
                           <td><?php echo $resultado['est_total_credito']?></td>
                           <td><?php echo $resultado['programa_id']?></td>
                           <td><?php echo $resultado['estado_civil_id']?></td>
                           <td>
-
+                              <!-- envia el id -->
                             <a href="validacion_eliminar_estudiantes.php?id=<?php echo $resultado['est_id']; ?>"  class="btn btn-danger glyphicon glyphicon-pencil" name="eliminar">Eliminar</a>   
                             
                             </div>
