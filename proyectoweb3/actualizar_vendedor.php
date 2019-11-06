@@ -15,7 +15,7 @@
     <meta property="og:url" content="http://pratikborsadiya.in/blog/vali-admin">
     <meta property="og:image" content="http://pratikborsadiya.in/blog/vali-admin/hero-social.png">
     <meta property="og:description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
-    <title>Data Table - Vali Admin</title>
+    <title>Actualizar estudiante</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -30,7 +30,7 @@
     
 
     <!-- Navbar-->
-    <header class="app-header"><a class="app-header__logo" href="index.html">Tienda Cotecnova</a>
+    <header class="app-header"><a class="app-header__logo" href="index.html"><img src="img/cafe11.png" border="radio" width="45" height="45">Tienda Cotecnova</a>
       <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
       <!-- Navbar Right Menu-->
       <ul class="app-nav">
@@ -91,15 +91,14 @@
     </header>
     <!-- Sidebar menu-->
     <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
-    <aside class="app-sidebar">
+     <aside class="app-sidebar">
       <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="https://s3.amazonaws.com/uifaces/faces/twitter/jsa/48.jpg" alt="User Image">
-        
         <div>
           <p class="app-sidebar__user-name">Sergio Arias</p>
           <p class="app-sidebar__user-designation">Administrador</p>
         </div>
       </div>
-     <ul class="app-menu">
+      <ul class="app-menu">
         <li><a class="app-menu__item" href="index.html"><i class="app-menu__icon fa fa-pie-chart"></i><span class="app-menu__label">inicio</span></a></li>
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">Estudiantes</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
@@ -113,6 +112,7 @@
             <li><a class="treeview-item" href="tabla_vend_creados.php"><i class="icon fa fa-circle-o"></i> Tabla vend. creados</a></li>
           </ul>
         </li>
+        <li><a class="app-menu__item" href="crear_credito.php"><i class="app-menu__icon fa fa-pie-chart"></i><span class="app-menu__label">Crear Estudiantes</span></a></li>
         <li><a class="app-menu__item" href="tabla_creditos.php"><i class="app-menu__icon fa fa-pie-chart"></i><span class="app-menu__label">Creditos Estu</span></a></li>
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">Programas</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
@@ -139,23 +139,33 @@
             <div class="tile-body">
               <table class="table table-hover table-bordered" id="sampleTable">
                 <?php
-                //llamamos la clase
+                       //llamamos la clase
                       require_once 'MySQL.php';
 //entragamos los valores de la clase
                       $mysql = new MySQL;
-                   //nos conectamos a la bd
+                    //nos conectamos a la bd
                       $mysql->conectar();
 //selecionamos los datos que usaremos de la bd
-                      $consulta = $mysql ->efectuarConsulta("select tiendacotecnova.vendedores.ven_doc_iden,tiendacotecnova.vendedores.ven_nombres, tiendacotecnova.vendedores.ven_apellidos,tiendacotecnova.vendedores.estado_civil_id,tiendacotecnova.vendedores.tipo_documento_id from tiendacotecnova.vendedores");
+                      $consulta = $mysql ->efectuarConsulta("select  
+                      tiendacotecnova.vendedores.ven_id, 
+                      tiendacotecnova.vendedores.ven_doc_iden,
+                      tiendacotecnova.vendedores.ven_nombres, 
+                      tiendacotecnova.vendedores.ven_apellidos, 
+ 
+                      tiendacotecnova.vendedores.estado_civil_id 
+                      from 
+                      tiendacotecnova.vendedores");
 
                   ?>
                   <thead>
                     <tr>
-                      <th scope="col">Documento</th>
+                    
                       <th scope="col">Nombre</th>
+                      
                       <th scope="col">Apellido</th>
+                     
                       <th scope="col">Estado civil</th>
-                      <th scope="col">Editar Vendedor</th>
+                      <th scope="col">Editar Usuario</th>
                     
 
                     </tr>
@@ -163,19 +173,20 @@
                   
 
                   <?php
-                  //ciclo para ver si la consulta si retorna algo en la columnas
                     while ($resultado=mysqli_fetch_assoc($consulta)) {
                   ?>
                   <tbody>
                       <tr>
-                    <!-- mostramos los valores de la base de datos en la tabla -->
-                          <td><?php echo $resultado['ven_doc_iden']?></td>
+                   
+                          
                           <td><?php echo $resultado['ven_nombres']?></td>
                           <td><?php echo $resultado['ven_apellidos']?></td>
+                          
+                          
                           <td><?php echo $resultado['estado_civil_id']?></td>
                           <td>
 
-                            <a href="actualizarvendedor.php" class="btn btn-success glyphicon glyphicon-pencil" name="editar">Editar</a>   
+                            <a href="formulario_actualizar_vendedor.php?id=<?php echo $resultado['ven_id']; ?>"  class="btn btn-success glyphicon glyphicon-pencil" name="editar">Editar</a>   
                             
                             </div>
                         </td>

@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
   <?php
-  //llamamos la clase
+  //traemos la clase
   require_once 'MySQL.php';
-  //pasamos las funciones de la clase a una nueva variable
+  //pasamos las funciones a una variable
   $mysql = new MySQL;
-   //realizamos la conexion a la bd
+   //nos conectamos a la bd
   $mysql->conectar();
-//consultamos los datos que vamos a usar mas adelante
+//realizamos una consulta con los valores que vamos a utilizar
   $tipodocumento= $mysql->efectuarConsulta("SELECT tiendacotecnova.tipo_documento.tipo_documento_id, tiendacotecnova.tipo_documento.tipo_documento_nombre from tiendacotecnova.tipo_documento");
   $estadocivil= $mysql->efectuarConsulta("SELECT tiendacotecnova.estado_civil.estado_civil_id, tiendacotecnova.estado_civil.estado_civil_nombre	 from tiendacotecnova.estado_civil");
+  $programa= $mysql->efectuarConsulta("SELECT tiendacotecnova.programa.programa_id, tiendacotecnova.programa.programa_nombre	 from tiendacotecnova.programa");
   ?>
 
 <head>
@@ -27,7 +28,7 @@
   <meta property="og:image" content="http://pratikborsadiya.in/blog/vali-admin/hero-social.png">
   <meta property="og:description"
     content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
-  <title>Form Actualizar vendedor</title>
+  <title>Actualizar</title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -136,20 +137,20 @@
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">Estudiantes</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
             <li><a class="treeview-item" href="estudiantes.html"><i class="icon fa fa-circle-o"></i> Administrar Estudiante</a></li>
-            <li><a class="treeview-item" href="Tabla_estu_creados.html"><i class="icon fa fa-circle-o"></i> Tabla Estu. creados</a></li>
+            <li><a class="treeview-item" href="tabla_estu_creados.php"><i class="icon fa fa-circle-o"></i> Tabla Estu. creados</a></li>
           </ul>
         </li>
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">Vendedores</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
             <li><a class="treeview-item" href="vendedoress.html"><i class="icon fa fa-circle-o"></i> Administrar Vendedores</a></li>
-            <li><a class="treeview-item" href="Tabla_ven_creados.html"><i class="icon fa fa-circle-o"></i> Tabla vend. creados</a></li>
+            <li><a class="treeview-item" href="tabla_ven_creados.php"><i class="icon fa fa-circle-o"></i> Tabla vend. creados</a></li>
           </ul>
         </li>
-        <li><a class="app-menu__item" href="tabla_creditos.php"><i class="app-menu__icon fa fa-pie-chart"></i><span class="app-menu__label">Creditos Estu</span></a></li>
+        <li><a class="app-menu__item" href="charts.html"><i class="app-menu__icon fa fa-pie-chart"></i><span class="app-menu__label">Creditos Estu</span></a></li>
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">Programas</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
             <li><a class="treeview-item" href="programa.html"><i class="icon fa fa-circle-o"></i> Crear Programas</a></li>
-            <li><a class="treeview-item" href="Tabla_estu_creados.html"><i class="icon fa fa-circle-o"></i> Ver Programas</a></li>
+            <li><a class="treeview-item" href="tabla_programa_creados.php"><i class="icon fa fa-circle-o"></i> Ver Programas</a></li>
           </ul>
         </li>
       </ul>
@@ -157,13 +158,13 @@
   <main class="app-content">
     <div class="app-title">
       <div>
-        <h1><i class="fa fa-edit"></i> Editar vendedor</h1>
+        <h1><i class="fa fa-edit"></i> Actualizar Estudiantes para credito</h1>
         <p>Bienvenidos, Por favor diligencie la Informacion</p>
       </div>
       <ul class="app-breadcrumb breadcrumb">
         <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-        <li class="breadcrumb-item">Editar Vendedor</li>
-        <li class="breadcrumb-item"><a href="#">Editar Vendedores</a></li>
+        <li class="breadcrumb-item">estudiantes</li>
+        <li class="breadcrumb-item"><a href="#">Actualizar estudiantes</a></li>
       </ul>
     </div>
     <div class="row">
@@ -171,85 +172,91 @@
         <div class="tile">
           <div class="row">
             <div class="col-lg-6">
-
-              <?php
-                  //llamamos la clase
+            <?php
+            //traemos la clase
                 require_once 'MySQL.php';
- //pasamos las funciones de la clase a una nueva variable
+//pasamos las funciones a una nueva vriable
                 $mysql = new MySQL;
-                 //realizamos la conexion a la bd
+              //nos conectamos a la bd
                 $mysql->conectar();
-                //obtenemos el id que enviamos con el boton
+                //id que se envio mediante el boton
                 $id=$_GET['id'];
-                //usamos una consulta en este caso utilizamos un inner join para unir los valores de dos tablas en una nueva
-                $consulta = $mysql ->efectuarConsulta("select tiendacotecnova.vendedores.ven_nombres,
-                tiendacotecnova.vendedores.est_apellidos,
+           
+                //creamos una consulta haciendo uso de un inner join para unir valores de dos tablas en una nueva
+                $consulta = $mysql ->efectuarConsulta("select 
+                tiendacotecnova.vendedores.ven_nombres,
+                tiendacotecnova.vendedores.ven_apellidos,
+
+
                 tiendacotecnova.estado_civil.estado_civil_nombre,
                 tiendacotecnova.estado_civil.estado_civil_id 
-                from tiendacotecnova.vendedores inner join tiendacotecnova.estado_civil 
-                on tiendacotecnova.vendedores.estado_civil_id = tiendacotecnova.estado_civil.estado_civil_id
+                from 
+                tiendacotecnova.vendedores
+                inner join 
+                tiendacotecnova.estado_civil 
+                on 
+                tiendacotecnova.vendedores.estado_civil_id = tiendacotecnova.estado_civil.estado_civil_id
+                
                 where ven_id =".$id."");
                 echo "$id";
-                //creamos un array con la consulta
+                //creaos un arreglo con la consulta
                 while ($resultado=mysqli_fetch_assoc($consulta)) {
                   $nombre = $resultado['ven_nombres'];
                   $apellido = $resultado['ven_apellidos'];
+                  
                   $estadocivil = $resultado['estado_civil_id'];
                   $estadoNombre = $resultado['estado_civil_nombre'];
+                  
                 }
-              //realizamos una consulta
+              //efectuamos consultas para usarlas en el formulario
                 $selectestado = $mysql -> efectuarConsulta("select tiendacotecnova.estado_civil.estado_civil_nombre, tiendacotecnova.estado_civil.estado_civil_id from tiendacotecnova.estado_civil");
 
-              ?>
-              <form method="POST" action="actualizar_vendedor.php?id=<?php echo $id; ?>">
-
                 
-
-
-              
+                
+                 
+                 
+              ?>
+              <form method="POST" action="actualizar_vendedores.php?id=<?php echo $id; ?>">
+  
                 <div class="form-group">
                   <label class="col-form-label">Nombres</label>
-                   <!-- mostramos los valores de la bd-->
+                  <!-- mostramos los valores de la bd-->
                   <input class="form-control" value="<?php echo $nombre;?>"  required name="nombre" type="text">
                 </div>
 
                 <div class="form-group">
-                 <!-- mostramos los valores de la bd-->
                   <label class="col-form-label">Apellidos</label>
+                   <!-- mostramos los valores de la bd-->
                   <input class="form-control" value="<?php echo $apellido;?>" required name="apellido" type="text">
                 </div>
-
-                <div class="form-group">
-                  <label class="col-form-label">Tipo docuento</label>
-                  <select name="tipodoc" class="form-control" >
-                   <!-- creamos un array con la tabla tipodocumento-->
-                    <?php while ($resultado=mysqli_fetch_assoc($tipodocumento)){?> 
-                     <!-- traemos los valores dentro del arreglo-->
-                    <option value="<?php echo $resultado['tipo_documento_id'] ?>"><?php echo $resultado['tipo_documento_nombre'] ?></option>
-                    <?php
-                    }
-                    ?>
-                  </select>
-                </div>
+             
+            
                 <div class="form-group">
                   <label class="col-form-label">Estado Civil</label>
-                  <select name="estadocivil" class="form-control" >
-                  <!-- creamos un array con la tabla tipodocumento-->
-                    <?php while ($resultado=mysqli_fetch_assoc($estadocivil)){?> 
-                    <!-- traemos los valores dentro del arreglo-->
+                  <select name="estadocivil" required class="form-control" >
+                    <option value="<?php echo $estadocivil; ?>"><?php echo $estadoNombre; ?></option>
+                    <option disable>Seleccione un nuevo estado civil</option>
+                     <!--creamos un arreglo con la tabla de estado civil-->
+                    <?php while ($resultado=mysqli_fetch_assoc($selectestado)){
+                    ?> 
+                     <!-- mostramos los valores del arreglo-->
                     <option value="<?php echo $resultado['estado_civil_id'] ?>"><?php echo $resultado['estado_civil_nombre'] ?></option>
+                    
                     <?php
                     }
                     ?>
                   </select>
                 </div>
             
+ 
 
-                
-                
-                <div class="tile-footer">
+
+
+
+              <div class="tile-footer">
                   <input type="submit" value="enviar" name="enviar">
                 </div>
+                
               </form>
             </div>
           </div>
