@@ -32,7 +32,7 @@ if ($_SESSION['admin_usser']!= "")  {
   </head>
   <body class="app sidebar-mini rtl">
     <!-- Navbar-->
-    <header class="app-header"><a class="app-header__logo" href="index.html"><img src="img/cafe11.png" border="radio" width="45" height="45">Tienda Cotecnova</a>
+    <header class="app-header"><a class="app-header__logo" href="index.php"><img src="img/cafe11.png" border="radio" width="45" height="45">Tienda Cotecnova</a>
       <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
       <!-- Navbar Right Menu-->
       <ul class="app-nav">
@@ -102,7 +102,7 @@ if ($_SESSION['admin_usser']!= "")  {
         </div>
       </div>
       <ul class="app-menu">
-        <li><a class="app-menu__item" href="index.html"><i class="app-menu__icon fa fa-pie-chart"></i><span class="app-menu__label">inicio</span></a></li>
+        <li><a class="app-menu__item" href="index.php"><i class="app-menu__icon fa fa-pie-chart"></i><span class="app-menu__label">inicio</span></a></li>
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">Estudiantes</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
             <li><a class="treeview-item" href="estudiantes.html"><i class="icon fa fa-circle-o"></i> Administrar Estudiante</a></li>

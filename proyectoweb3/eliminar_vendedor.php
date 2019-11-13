@@ -188,7 +188,7 @@
                           <td><?php echo $resultado['estado_civil_id']?></td>
                           <td>
                               <!-- envia el id -->
-                            <a href="validacion_eliminar_estudiantes.php?id=<?php echo $resultado['ven_id']; ?>"  class="btn btn-danger glyphicon glyphicon-pencil" name="eliminar">Eliminar</a>   
+                            <a href="validacion_eliminar_vendedor.php?id=<?php echo $resultado['ven_id']; ?>"  class="btn btn-danger glyphicon glyphicon-pencil" name="eliminar">Eliminar</a>   
                             
                             </div>
                         </td>

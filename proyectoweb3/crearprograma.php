@@ -10,6 +10,7 @@
  
     //traemos los valores del formulario
     $programa= $_POST['programa'];
+    $activo = 1;
     
 //pasamos las funciones de la clase a una nueva variable
     $mysql = new MySQL;
@@ -20,7 +21,7 @@
     $insertar= $mysql->efectuarConsulta("insert into tiendacotecnova.programa
     (programa_nombre) 
     VALUES(   
-    '".$programa."')"); 
+        '" .$activo. "','".$programa."')"); 
 
  
    
@@ -28,7 +29,7 @@
 //si se realiza la consulta
 if($insertar==true){
     //redirigimos al index
-    header("Location: index.html");
+    header("Location: index.php");
  } 
  else
   {
