@@ -21,7 +21,7 @@ if(isset($_GET['id']) && !empty($_GET['id'])){
          // si se cumple mostramos este
            echo "<div class=\"alert alert-success alert-dismissible\"><a href=\"index.html\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a><strong>Bien!</strong>El Estudiante ha sido inhabilitado correctamente.</div>";
       //redirigimos a la pagina principal
-           header( "refresh:3;url=index.html" ); 
+           header( "refresh:3;url=index.php" ); 
         } else {
           //sino se cumple mostraamos este
             echo "<div class=\"alert alert-warning alert-dismissible\"><a href=\"eliminar_estudiantes.php\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a><strong>Alerta!</strong>No se ha podido inhabilitar el Estudiante.</div>";

@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
+
+
   <head>
     <meta name="description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
     <!-- Twitter meta-->
@@ -13,7 +15,7 @@
     <meta property="og:url" content="http://pratikborsadiya.in/blog/vali-admin">
     <meta property="og:image" content="http://pratikborsadiya.in/blog/vali-admin/hero-social.png">
     <meta property="og:description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
-    <title>Info. vendedores</title>
+    <title>Eliminar estudiantes</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,6 +25,10 @@
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <body class="app sidebar-mini rtl">
+
+
+    
+
     <!-- Navbar-->
     <header class="app-header"><a class="app-header__logo" href="index.html"><img src="img/cafe11.png" border="radio" width="45" height="45">Tienda Cotecnova</a>
       <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
@@ -84,15 +90,16 @@
       </ul>
     </header>
     <!-- Sidebar menu-->
-   <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
-     <aside class="app-sidebar">
+    <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+    <aside class="app-sidebar">
       <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="https://s3.amazonaws.com/uifaces/faces/twitter/jsa/48.jpg" alt="User Image">
+        
         <div>
           <p class="app-sidebar__user-name">Sergio Arias</p>
           <p class="app-sidebar__user-designation">Administrador</p>
         </div>
       </div>
-      <ul class="app-menu">
+     <ul class="app-menu">
         <li><a class="app-menu__item" href="index.html"><i class="app-menu__icon fa fa-pie-chart"></i><span class="app-menu__label">inicio</span></a></li>
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">Estudiantes</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
@@ -106,8 +113,7 @@
             <li><a class="treeview-item" href="tabla_vend_creados.php"><i class="icon fa fa-circle-o"></i> Tabla vend. creados</a></li>
           </ul>
         </li>
-        <li><a class="app-menu__item" href="crear_credito.php"><i class="app-menu__icon fa fa-pie-chart"></i><span class="app-menu__label">Crear Estudiantes</span></a></li>
-        <li><a class="app-menu__item" href="tabla_creditos.php"><i class="app-menu__icon fa fa-pie-chart"></i><span class="app-menu__label">Creditos Estu</span></a></li>
+        <li><a class="app-menu__item" href="charts.html"><i class="app-menu__icon fa fa-pie-chart"></i><span class="app-menu__label">Creditos Estu</span></a></li>
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">Programas</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
             <li><a class="treeview-item" href="programa.html"><i class="icon fa fa-circle-o"></i> Crear Programas</a></li>
@@ -118,51 +124,86 @@
     </aside>
     <main class="app-content">
       <div class="app-title">
-        <div class="div">
-          <h1><i class="fa fa-laptop"></i> Vendedores</h1>
-          <p></p>
+        <div>
+          <h1><i class="fa fa-th-list"></i> Estudiantes Registrados</h1>
         </div>
-        <ul class="app-breadcrumb breadcrumb">
+        <ul class="app-breadcrumb breadcrumb side">
           <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-          <li class="breadcrumb-item"><a href="#">Vendedores</a></li>
+          <li class="breadcrumb-item">Estudiantes</li>
+          <li class="breadcrumb-item active"><a href="#">tabla Estudiantes</a></li>
         </ul>
       </div>
-      <!-- Buttons-->
-      <div class="tile mb-4">
-        <div class="page-header">
-          <div class="row">
-            <div class="col-lg-12">
-              <h2 class="mb-3 line-head" id="buttons">Tabla Vendedores</h2>
-            </div>
-          </div>
-        </div>
-      
       <div class="row">
-          <div class="col-lg-7">
-            <p class="bs-component">
-                <a class="btn" href="Tabla_estu_creados.html" >Tabla De los Vendedores Creados </a> </p>
-          </div>
-        </div>
-      </div>
-      <div class="tile mb-4">
-        <div class="page-header">
-          <div class="row">
-            <div class="col-lg-12">
-              <h2 class="mb-3 line-head" id="buttons">Opciones</h2>
+        <div class="col-md-12">
+          <div class="tile">
+            <div class="tile-body">
+              <table class="table table-hover table-bordered" id="sampleTable">
+                <?php
+                  //llamamos la clase
+                      require_once 'MySQL.php';
+//pasamos las funciones a una nueva variable
+                      $mysql = new MySQL;
+                 //nos conectamos a la bd  
+                      $mysql->conectar();
+//realizamos una consulta con los datos que utilizaremos
+                      $consulta = $mysql ->efectuarConsulta("select  
+                      tiendacotecnova.vendedores.ven_id, 
+                      tiendacotecnova.vendedores.ven_doc_iden,
+                      tiendacotecnova.vendedores.ven_nombres, 
+                      tiendacotecnova.vendedores.ven_apellidos, 
+                  
+                     
+                      tiendacotecnova.vendedores.estado_civil_id 
+                      from 
+                      tiendacotecnova.vendedores where activo=1");
+
+                  ?>
+                  <thead>
+                    <tr>
+                    
+                      <th scope="col">Nombre</th>
+                      
+                      <th scope="col">Apellido</th>
+
+                      <th scope="col">Estado civil</th>
+                      <th scope="col">Eliminar Usuario</th>
+                    
+
+                    </tr>
+                  </thead>
+                  
+
+                  <?php
+                  //convertimos la consulta en un arreglo
+                    while ($resultado=mysqli_fetch_assoc($consulta)) {
+
+                  ?>
+                  <tbody>
+                      <tr>
+                   
+                          <!-- mostramos los valores en el arreglo-->
+                          <td><?php echo $resultado['ven_nombres']?></td>
+                          <td><?php echo $resultado['ven_apellidos']?></td>
+
+                          <td><?php echo $resultado['estado_civil_id']?></td>
+                          <td>
+                              <!-- envia el id -->
+                            <a href="validacion_eliminar_estudiantes.php?id=<?php echo $resultado['ven_id']; ?>"  class="btn btn-danger glyphicon glyphicon-pencil" name="eliminar">Eliminar</a>   
+                            
+                            </div>
+                        </td>
+
+                      </tr>
+                  </tbody>
+                <?php
+                }
+                ?>
+                
+              </table>
             </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col-lg-7">
-            <p class="bs-component">
-                <a class="btn" href="crear_vendedores.php" >Crear</a>
-                <a class="btn" href="#" >Editar</a>
-                <a class="btn" href="eliminar_vendedor.php" >Eliminar</a>
-                <a class="btn" href="actualizar_vendedor.php" >Actualizar</a>
-            </p>
-          </div>
-        </div>
-      </div>
+      </div>  
     </main>
     <!-- Essential javascripts for application to work-->
     <script src="js/jquery-3.2.1.min.js"></script>
@@ -172,10 +213,10 @@
     <!-- The javascript plugin to display page loading on top-->
     <script src="js/plugins/pace.min.js"></script>
     <!-- Page specific javascripts-->
-    <script>
-      $('.bs-component [data-toggle="popover"]').popover();
-      $('.bs-component [data-toggle="tooltip"]').tooltip();
-    </script>
+    <!-- Data table plugin-->
+    <script type="text/javascript" src="js/plugins/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="js/plugins/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript">$('#sampleTable').DataTable();</script>
     <!-- Google analytics script-->
     <script type="text/javascript">
       if(document.location.hostname == 'pratikborsadiya.in') {
